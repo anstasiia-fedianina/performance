@@ -129,6 +129,39 @@
             <stringProp name="TestPlan.comments">Extracts next step id from response body using regular expression</stringProp>
           </RegexExtractor>
           <hashTree/>
+          <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="Regex_Extract_Next_Step_Number" enabled="true">
+            <stringProp name="RegexExtractor.useHeaders">false</stringProp>
+            <stringProp name="RegexExtractor.refname">challehger_step_number</stringProp>
+            <stringProp name="RegexExtractor.regex">name=&quot;challenger\[step_number\]&quot; type=&quot;hidden&quot; value=&quot;(\d+?)&quot;</stringProp>
+            <stringProp name="RegexExtractor.template">$1$</stringProp>
+            <stringProp name="RegexExtractor.default"></stringProp>
+            <stringProp name="RegexExtractor.match_number">1</stringProp>
+            <stringProp name="Scope.variable"></stringProp>
+            <stringProp name="TestPlan.comments">Extracts next step number from response body using regular expression</stringProp>
+          </RegexExtractor>
+          <hashTree/>
+          <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="Regex_Extract_UTF8_Token" enabled="true">
+            <stringProp name="RegexExtractor.useHeaders">false</stringProp>
+            <stringProp name="RegexExtractor.refname">challehger_utf8_token</stringProp>
+            <stringProp name="RegexExtractor.regex">name=&quot;utf8&quot; type=&quot;hidden&quot; value=&quot;(.+?)&quot;</stringProp>
+            <stringProp name="RegexExtractor.template">$1$</stringProp>
+            <stringProp name="RegexExtractor.default"></stringProp>
+            <stringProp name="RegexExtractor.match_number">1</stringProp>
+            <stringProp name="Scope.variable"></stringProp>
+            <stringProp name="TestPlan.comments">Extracts utf-8 token from response body using regular expression</stringProp>
+          </RegexExtractor>
+          <hashTree/>
+          <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="Regex_Extract_Commit_Value" enabled="true">
+            <stringProp name="RegexExtractor.useHeaders">false</stringProp>
+            <stringProp name="RegexExtractor.refname">challehger_commit_value</stringProp>
+            <stringProp name="RegexExtractor.regex">name=&quot;commit&quot; type=&quot;submit&quot; value=&quot;(.+?)&quot;</stringProp>
+            <stringProp name="RegexExtractor.template">$1$</stringProp>
+            <stringProp name="RegexExtractor.default"></stringProp>
+            <stringProp name="RegexExtractor.match_number">1</stringProp>
+            <stringProp name="Scope.variable"></stringProp>
+            <stringProp name="TestPlan.comments">Extracts commit value from response body using regular expression</stringProp>
+          </RegexExtractor>
+          <hashTree/>
           <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Assert_Is_OK" enabled="true">
             <collectionProp name="Asserion.test_strings">
               <stringProp name="49586">200</stringProp>
@@ -146,7 +179,7 @@
             <collectionProp name="Arguments.arguments">
               <elementProp name="utf8" elementType="HTTPArgument">
                 <boolProp name="HTTPArgument.always_encode">true</boolProp>
-                <stringProp name="Argument.value">✓</stringProp>
+                <stringProp name="Argument.value">${challehger_utf8_token}</stringProp>
                 <stringProp name="Argument.metadata">=</stringProp>
                 <boolProp name="HTTPArgument.use_equals">true</boolProp>
                 <stringProp name="Argument.name">utf8</stringProp>
@@ -167,14 +200,14 @@
               </elementProp>
               <elementProp name="challenger[step_number]" elementType="HTTPArgument">
                 <boolProp name="HTTPArgument.always_encode">true</boolProp>
-                <stringProp name="Argument.value">1</stringProp>
+                <stringProp name="Argument.value">${challehger_step_number}</stringProp>
                 <stringProp name="Argument.metadata">=</stringProp>
                 <boolProp name="HTTPArgument.use_equals">true</boolProp>
                 <stringProp name="Argument.name">challenger[step_number]</stringProp>
               </elementProp>
               <elementProp name="commit" elementType="HTTPArgument">
                 <boolProp name="HTTPArgument.always_encode">true</boolProp>
-                <stringProp name="Argument.value">Start</stringProp>
+                <stringProp name="Argument.value">${challehger_commit_value}</stringProp>
                 <stringProp name="Argument.metadata">=</stringProp>
                 <boolProp name="HTTPArgument.use_equals">true</boolProp>
                 <stringProp name="Argument.name">commit</stringProp>
@@ -196,6 +229,17 @@
           <stringProp name="HTTPSampler.response_timeout"></stringProp>
         </HTTPSamplerProxy>
         <hashTree>
+          <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="Regex_Extract_Auth_Token" enabled="true">
+            <stringProp name="RegexExtractor.useHeaders">false</stringProp>
+            <stringProp name="RegexExtractor.refname">authenticity_token</stringProp>
+            <stringProp name="RegexExtractor.regex">name=&quot;authenticity_token&quot; type=&quot;hidden&quot; value=&quot;(.+?=)&quot; /&gt;</stringProp>
+            <stringProp name="RegexExtractor.template">$1$</stringProp>
+            <stringProp name="RegexExtractor.default"></stringProp>
+            <stringProp name="RegexExtractor.match_number">1</stringProp>
+            <stringProp name="Scope.variable"></stringProp>
+            <stringProp name="TestPlan.comments">Extracts authenticity token from response body using regular expression</stringProp>
+          </RegexExtractor>
+          <hashTree/>
           <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="Regexp_Extract_Next_Step_Id" enabled="true">
             <stringProp name="RegexExtractor.useHeaders">false</stringProp>
             <stringProp name="RegexExtractor.refname">challehger_step_id</stringProp>
@@ -205,6 +249,39 @@
             <stringProp name="RegexExtractor.match_number">1</stringProp>
             <stringProp name="Scope.variable"></stringProp>
             <stringProp name="TestPlan.comments">Extracts next step id from response body using regular expression</stringProp>
+          </RegexExtractor>
+          <hashTree/>
+          <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="Regex_Extract_Next_Step_Number" enabled="true">
+            <stringProp name="RegexExtractor.useHeaders">false</stringProp>
+            <stringProp name="RegexExtractor.refname">challehger_step_number</stringProp>
+            <stringProp name="RegexExtractor.regex">name=&quot;challenger\[step_number\]&quot; type=&quot;hidden&quot; value=&quot;(\d+?)&quot;</stringProp>
+            <stringProp name="RegexExtractor.template">$1$</stringProp>
+            <stringProp name="RegexExtractor.default"></stringProp>
+            <stringProp name="RegexExtractor.match_number">1</stringProp>
+            <stringProp name="Scope.variable"></stringProp>
+            <stringProp name="TestPlan.comments">Extracts next step number from response body using regular expression</stringProp>
+          </RegexExtractor>
+          <hashTree/>
+          <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="Regex_Extract_UTF8_Token" enabled="true">
+            <stringProp name="RegexExtractor.useHeaders">false</stringProp>
+            <stringProp name="RegexExtractor.refname">challehger_utf8_token</stringProp>
+            <stringProp name="RegexExtractor.regex">name=&quot;utf8&quot; type=&quot;hidden&quot; value=&quot;(.+?)&quot;</stringProp>
+            <stringProp name="RegexExtractor.template">$1$</stringProp>
+            <stringProp name="RegexExtractor.default"></stringProp>
+            <stringProp name="RegexExtractor.match_number">1</stringProp>
+            <stringProp name="Scope.variable"></stringProp>
+            <stringProp name="TestPlan.comments">Extracts utf-8 token from response body using regular expression</stringProp>
+          </RegexExtractor>
+          <hashTree/>
+          <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="Regex_Extract_Commit_Value" enabled="true">
+            <stringProp name="RegexExtractor.useHeaders">false</stringProp>
+            <stringProp name="RegexExtractor.refname">challehger_commit_value</stringProp>
+            <stringProp name="RegexExtractor.regex">name=&quot;commit&quot; type=&quot;submit&quot; value=&quot;(.+?)&quot;</stringProp>
+            <stringProp name="RegexExtractor.template">$1$</stringProp>
+            <stringProp name="RegexExtractor.default"></stringProp>
+            <stringProp name="RegexExtractor.match_number">1</stringProp>
+            <stringProp name="Scope.variable"></stringProp>
+            <stringProp name="TestPlan.comments">Extracts commit value from response body using regular expression</stringProp>
           </RegexExtractor>
           <hashTree/>
           <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Assert_Is_OK" enabled="true">
@@ -224,7 +301,7 @@
             <collectionProp name="Arguments.arguments">
               <elementProp name="utf8" elementType="HTTPArgument">
                 <boolProp name="HTTPArgument.always_encode">true</boolProp>
-                <stringProp name="Argument.value">✓</stringProp>
+                <stringProp name="Argument.value">${challehger_utf8_token}</stringProp>
                 <stringProp name="Argument.metadata">=</stringProp>
                 <boolProp name="HTTPArgument.use_equals">true</boolProp>
                 <stringProp name="Argument.name">utf8</stringProp>
@@ -245,7 +322,7 @@
               </elementProp>
               <elementProp name="challenger[step_number]" elementType="HTTPArgument">
                 <boolProp name="HTTPArgument.always_encode">true</boolProp>
-                <stringProp name="Argument.value">2</stringProp>
+                <stringProp name="Argument.value">${challehger_step_number}</stringProp>
                 <stringProp name="Argument.metadata">=</stringProp>
                 <boolProp name="HTTPArgument.use_equals">true</boolProp>
                 <stringProp name="Argument.name">challenger[step_number]</stringProp>
@@ -259,7 +336,7 @@
               </elementProp>
               <elementProp name="commit" elementType="HTTPArgument">
                 <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                <stringProp name="Argument.value">Next</stringProp>
+                <stringProp name="Argument.value">${challehger_commit_value}</stringProp>
                 <stringProp name="Argument.metadata">=</stringProp>
                 <boolProp name="HTTPArgument.use_equals">true</boolProp>
                 <stringProp name="Argument.name">commit</stringProp>
@@ -281,6 +358,17 @@
           <stringProp name="HTTPSampler.response_timeout"></stringProp>
         </HTTPSamplerProxy>
         <hashTree>
+          <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="Regex_Extract_Auth_Token" enabled="true">
+            <stringProp name="RegexExtractor.useHeaders">false</stringProp>
+            <stringProp name="RegexExtractor.refname">authenticity_token</stringProp>
+            <stringProp name="RegexExtractor.regex">name=&quot;authenticity_token&quot; type=&quot;hidden&quot; value=&quot;(.+?=)&quot; /&gt;</stringProp>
+            <stringProp name="RegexExtractor.template">$1$</stringProp>
+            <stringProp name="RegexExtractor.default"></stringProp>
+            <stringProp name="RegexExtractor.match_number">1</stringProp>
+            <stringProp name="Scope.variable"></stringProp>
+            <stringProp name="TestPlan.comments">Extracts authenticity token from response body using regular expression</stringProp>
+          </RegexExtractor>
+          <hashTree/>
           <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="Regexp_Extract_Next_Step_Id" enabled="true">
             <stringProp name="RegexExtractor.useHeaders">false</stringProp>
             <stringProp name="RegexExtractor.refname">challehger_step_id</stringProp>
@@ -290,6 +378,39 @@
             <stringProp name="RegexExtractor.match_number">1</stringProp>
             <stringProp name="Scope.variable"></stringProp>
             <stringProp name="TestPlan.comments">Extracts next step id from response body using regular expression</stringProp>
+          </RegexExtractor>
+          <hashTree/>
+          <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="Regex_Extract_Next_Step_Number" enabled="true">
+            <stringProp name="RegexExtractor.useHeaders">false</stringProp>
+            <stringProp name="RegexExtractor.refname">challehger_step_number</stringProp>
+            <stringProp name="RegexExtractor.regex">name=&quot;challenger\[step_number\]&quot; type=&quot;hidden&quot; value=&quot;(\d+?)&quot;</stringProp>
+            <stringProp name="RegexExtractor.template">$1$</stringProp>
+            <stringProp name="RegexExtractor.default"></stringProp>
+            <stringProp name="RegexExtractor.match_number">1</stringProp>
+            <stringProp name="Scope.variable"></stringProp>
+            <stringProp name="TestPlan.comments">Extracts next step number from response body using regular expression</stringProp>
+          </RegexExtractor>
+          <hashTree/>
+          <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="Regex_Extract_UTF8_Token" enabled="true">
+            <stringProp name="RegexExtractor.useHeaders">false</stringProp>
+            <stringProp name="RegexExtractor.refname">challehger_utf8_token</stringProp>
+            <stringProp name="RegexExtractor.regex">name=&quot;utf8&quot; type=&quot;hidden&quot; value=&quot;(.+?)&quot;</stringProp>
+            <stringProp name="RegexExtractor.template">$1$</stringProp>
+            <stringProp name="RegexExtractor.default"></stringProp>
+            <stringProp name="RegexExtractor.match_number">1</stringProp>
+            <stringProp name="Scope.variable"></stringProp>
+            <stringProp name="TestPlan.comments">Extracts utf-8 token from response body using regular expression</stringProp>
+          </RegexExtractor>
+          <hashTree/>
+          <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="Regex_Extract_Commit_Value" enabled="true">
+            <stringProp name="RegexExtractor.useHeaders">false</stringProp>
+            <stringProp name="RegexExtractor.refname">challehger_commit_value</stringProp>
+            <stringProp name="RegexExtractor.regex">name=&quot;commit&quot; type=&quot;submit&quot; value=&quot;(.+?)&quot;</stringProp>
+            <stringProp name="RegexExtractor.template">$1$</stringProp>
+            <stringProp name="RegexExtractor.default"></stringProp>
+            <stringProp name="RegexExtractor.match_number">1</stringProp>
+            <stringProp name="Scope.variable"></stringProp>
+            <stringProp name="TestPlan.comments">Extracts commit value from response body using regular expression</stringProp>
           </RegexExtractor>
           <hashTree/>
           <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="Regexp_Extract_Order_Info" enabled="true">
@@ -341,7 +462,7 @@ vars.putObject(&quot;max_order_value&quot;, max_order_value);</stringProp>
             <collectionProp name="Arguments.arguments">
               <elementProp name="utf8" elementType="HTTPArgument">
                 <boolProp name="HTTPArgument.always_encode">true</boolProp>
-                <stringProp name="Argument.value">✓</stringProp>
+                <stringProp name="Argument.value">${challehger_utf8_token}</stringProp>
                 <stringProp name="Argument.metadata">=</stringProp>
                 <boolProp name="HTTPArgument.use_equals">true</boolProp>
                 <stringProp name="Argument.name">utf8</stringProp>
@@ -362,7 +483,7 @@ vars.putObject(&quot;max_order_value&quot;, max_order_value);</stringProp>
               </elementProp>
               <elementProp name="challenger[step_number]" elementType="HTTPArgument">
                 <boolProp name="HTTPArgument.always_encode">true</boolProp>
-                <stringProp name="Argument.value">3</stringProp>
+                <stringProp name="Argument.value">${challehger_step_number}</stringProp>
                 <stringProp name="Argument.metadata">=</stringProp>
                 <boolProp name="HTTPArgument.use_equals">true</boolProp>
                 <stringProp name="Argument.name">challenger[step_number]</stringProp>
@@ -383,7 +504,7 @@ vars.putObject(&quot;max_order_value&quot;, max_order_value);</stringProp>
               </elementProp>
               <elementProp name="commit" elementType="HTTPArgument">
                 <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                <stringProp name="Argument.value">Next</stringProp>
+                <stringProp name="Argument.value">${challehger_commit_value}</stringProp>
                 <stringProp name="Argument.metadata">=</stringProp>
                 <boolProp name="HTTPArgument.use_equals">true</boolProp>
                 <stringProp name="Argument.name">commit</stringProp>
@@ -405,6 +526,17 @@ vars.putObject(&quot;max_order_value&quot;, max_order_value);</stringProp>
           <stringProp name="HTTPSampler.response_timeout"></stringProp>
         </HTTPSamplerProxy>
         <hashTree>
+          <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="Regex_Extract_Auth_Token" enabled="true">
+            <stringProp name="RegexExtractor.useHeaders">false</stringProp>
+            <stringProp name="RegexExtractor.refname">authenticity_token</stringProp>
+            <stringProp name="RegexExtractor.regex">name=&quot;authenticity_token&quot; type=&quot;hidden&quot; value=&quot;(.+?=)&quot; /&gt;</stringProp>
+            <stringProp name="RegexExtractor.template">$1$</stringProp>
+            <stringProp name="RegexExtractor.default"></stringProp>
+            <stringProp name="RegexExtractor.match_number">1</stringProp>
+            <stringProp name="Scope.variable"></stringProp>
+            <stringProp name="TestPlan.comments">Extracts authenticity token from response body using regular expression</stringProp>
+          </RegexExtractor>
+          <hashTree/>
           <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="Regexp_Extract_Next_Step_Id" enabled="true">
             <stringProp name="RegexExtractor.useHeaders">false</stringProp>
             <stringProp name="RegexExtractor.refname">challehger_step_id</stringProp>
@@ -414,6 +546,39 @@ vars.putObject(&quot;max_order_value&quot;, max_order_value);</stringProp>
             <stringProp name="RegexExtractor.match_number">1</stringProp>
             <stringProp name="Scope.variable"></stringProp>
             <stringProp name="TestPlan.comments">Extracts next step id from response body using regular expression</stringProp>
+          </RegexExtractor>
+          <hashTree/>
+          <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="Regex_Extract_Next_Step_Number" enabled="true">
+            <stringProp name="RegexExtractor.useHeaders">false</stringProp>
+            <stringProp name="RegexExtractor.refname">challehger_step_number</stringProp>
+            <stringProp name="RegexExtractor.regex">name=&quot;challenger\[step_number\]&quot; type=&quot;hidden&quot; value=&quot;(\d+?)&quot;</stringProp>
+            <stringProp name="RegexExtractor.template">$1$</stringProp>
+            <stringProp name="RegexExtractor.default"></stringProp>
+            <stringProp name="RegexExtractor.match_number">1</stringProp>
+            <stringProp name="Scope.variable"></stringProp>
+            <stringProp name="TestPlan.comments">Extracts next step number from response body using regular expression</stringProp>
+          </RegexExtractor>
+          <hashTree/>
+          <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="Regex_Extract_UTF8_Token" enabled="true">
+            <stringProp name="RegexExtractor.useHeaders">false</stringProp>
+            <stringProp name="RegexExtractor.refname">challehger_utf8_token</stringProp>
+            <stringProp name="RegexExtractor.regex">name=&quot;utf8&quot; type=&quot;hidden&quot; value=&quot;(.+?)&quot;</stringProp>
+            <stringProp name="RegexExtractor.template">$1$</stringProp>
+            <stringProp name="RegexExtractor.default"></stringProp>
+            <stringProp name="RegexExtractor.match_number">1</stringProp>
+            <stringProp name="Scope.variable"></stringProp>
+            <stringProp name="TestPlan.comments">Extracts utf-8 token from response body using regular expression</stringProp>
+          </RegexExtractor>
+          <hashTree/>
+          <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="Regex_Extract_Commit_Value" enabled="true">
+            <stringProp name="RegexExtractor.useHeaders">false</stringProp>
+            <stringProp name="RegexExtractor.refname">challehger_commit_value</stringProp>
+            <stringProp name="RegexExtractor.regex">name=&quot;commit&quot; type=&quot;submit&quot; value=&quot;(.+?)&quot;</stringProp>
+            <stringProp name="RegexExtractor.template">$1$</stringProp>
+            <stringProp name="RegexExtractor.default"></stringProp>
+            <stringProp name="RegexExtractor.match_number">1</stringProp>
+            <stringProp name="Scope.variable"></stringProp>
+            <stringProp name="TestPlan.comments">Extracts commit value from response body using regular expression</stringProp>
           </RegexExtractor>
           <hashTree/>
           <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="Regexp_Extract_All_Order_Numbers_And_Values" enabled="true">
@@ -457,7 +622,7 @@ for(i = 1; i &lt;= matchNr; i++) {
             <collectionProp name="Arguments.arguments">
               <elementProp name="utf8" elementType="HTTPArgument">
                 <boolProp name="HTTPArgument.always_encode">true</boolProp>
-                <stringProp name="Argument.value">✓</stringProp>
+                <stringProp name="Argument.value">${challehger_utf8_token}</stringProp>
                 <stringProp name="Argument.metadata">=</stringProp>
                 <boolProp name="HTTPArgument.use_equals">true</boolProp>
                 <stringProp name="Argument.name">utf8</stringProp>
@@ -478,7 +643,7 @@ for(i = 1; i &lt;= matchNr; i++) {
               </elementProp>
               <elementProp name="challenger[step_number]" elementType="HTTPArgument">
                 <boolProp name="HTTPArgument.always_encode">true</boolProp>
-                <stringProp name="Argument.value">4</stringProp>
+                <stringProp name="Argument.value">${challehger_step_number}</stringProp>
                 <stringProp name="Argument.metadata">=</stringProp>
                 <boolProp name="HTTPArgument.use_equals">true</boolProp>
                 <stringProp name="Argument.name">challenger[step_number]</stringProp>
@@ -555,7 +720,7 @@ for(i = 1; i &lt;= matchNr; i++) {
               </elementProp>
               <elementProp name="commit" elementType="HTTPArgument">
                 <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                <stringProp name="Argument.value">Next</stringProp>
+                <stringProp name="Argument.value">${challehger_commit_value}</stringProp>
                 <stringProp name="Argument.metadata">=</stringProp>
                 <boolProp name="HTTPArgument.use_equals">true</boolProp>
                 <stringProp name="Argument.name">commit</stringProp>
@@ -577,6 +742,17 @@ for(i = 1; i &lt;= matchNr; i++) {
           <stringProp name="HTTPSampler.response_timeout"></stringProp>
         </HTTPSamplerProxy>
         <hashTree>
+          <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="Regex_Extract_Auth_Token" enabled="true">
+            <stringProp name="RegexExtractor.useHeaders">false</stringProp>
+            <stringProp name="RegexExtractor.refname">authenticity_token</stringProp>
+            <stringProp name="RegexExtractor.regex">name=&quot;authenticity_token&quot; type=&quot;hidden&quot; value=&quot;(.+?=)&quot; /&gt;</stringProp>
+            <stringProp name="RegexExtractor.template">$1$</stringProp>
+            <stringProp name="RegexExtractor.default"></stringProp>
+            <stringProp name="RegexExtractor.match_number">1</stringProp>
+            <stringProp name="Scope.variable"></stringProp>
+            <stringProp name="TestPlan.comments">Extracts authenticity token from response body using regular expression</stringProp>
+          </RegexExtractor>
+          <hashTree/>
           <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="Regexp_Extract_Next_Step_Id" enabled="true">
             <stringProp name="RegexExtractor.useHeaders">false</stringProp>
             <stringProp name="RegexExtractor.refname">challehger_step_id</stringProp>
@@ -586,6 +762,39 @@ for(i = 1; i &lt;= matchNr; i++) {
             <stringProp name="RegexExtractor.match_number">1</stringProp>
             <stringProp name="Scope.variable"></stringProp>
             <stringProp name="TestPlan.comments">Extracts next step id from response body using regular expression</stringProp>
+          </RegexExtractor>
+          <hashTree/>
+          <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="Regex_Extract_Next_Step_Number" enabled="true">
+            <stringProp name="RegexExtractor.useHeaders">false</stringProp>
+            <stringProp name="RegexExtractor.refname">challehger_step_number</stringProp>
+            <stringProp name="RegexExtractor.regex">name=&quot;challenger\[step_number\]&quot; type=&quot;hidden&quot; value=&quot;(\d+?)&quot;</stringProp>
+            <stringProp name="RegexExtractor.template">$1$</stringProp>
+            <stringProp name="RegexExtractor.default"></stringProp>
+            <stringProp name="RegexExtractor.match_number">1</stringProp>
+            <stringProp name="Scope.variable"></stringProp>
+            <stringProp name="TestPlan.comments">Extracts next step number from response body using regular expression</stringProp>
+          </RegexExtractor>
+          <hashTree/>
+          <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="Regex_Extract_UTF8_Token" enabled="true">
+            <stringProp name="RegexExtractor.useHeaders">false</stringProp>
+            <stringProp name="RegexExtractor.refname">challehger_utf8_token</stringProp>
+            <stringProp name="RegexExtractor.regex">name=&quot;utf8&quot; type=&quot;hidden&quot; value=&quot;(.+?)&quot;</stringProp>
+            <stringProp name="RegexExtractor.template">$1$</stringProp>
+            <stringProp name="RegexExtractor.default"></stringProp>
+            <stringProp name="RegexExtractor.match_number">1</stringProp>
+            <stringProp name="Scope.variable"></stringProp>
+            <stringProp name="TestPlan.comments">Extracts utf-8 token from response body using regular expression</stringProp>
+          </RegexExtractor>
+          <hashTree/>
+          <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="Regex_Extract_Commit_Value" enabled="true">
+            <stringProp name="RegexExtractor.useHeaders">false</stringProp>
+            <stringProp name="RegexExtractor.refname">challehger_commit_value</stringProp>
+            <stringProp name="RegexExtractor.regex">name=&quot;commit&quot; type=&quot;submit&quot; value=&quot;(.+?)&quot;</stringProp>
+            <stringProp name="RegexExtractor.template">$1$</stringProp>
+            <stringProp name="RegexExtractor.default"></stringProp>
+            <stringProp name="RegexExtractor.match_number">1</stringProp>
+            <stringProp name="Scope.variable"></stringProp>
+            <stringProp name="TestPlan.comments">Extracts commit value from response body using regular expression</stringProp>
           </RegexExtractor>
           <hashTree/>
           <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Assert_Is_OK" enabled="true">
@@ -644,7 +853,7 @@ for(i = 1; i &lt;= matchNr; i++) {
             <collectionProp name="Arguments.arguments">
               <elementProp name="utf8" elementType="HTTPArgument">
                 <boolProp name="HTTPArgument.always_encode">true</boolProp>
-                <stringProp name="Argument.value">✓</stringProp>
+                <stringProp name="Argument.value">${challehger_utf8_token}</stringProp>
                 <stringProp name="Argument.metadata">=</stringProp>
                 <boolProp name="HTTPArgument.use_equals">true</boolProp>
                 <stringProp name="Argument.name">utf8</stringProp>
@@ -665,7 +874,7 @@ for(i = 1; i &lt;= matchNr; i++) {
               </elementProp>
               <elementProp name="challenger[step_number]" elementType="HTTPArgument">
                 <boolProp name="HTTPArgument.always_encode">true</boolProp>
-                <stringProp name="Argument.value">5</stringProp>
+                <stringProp name="Argument.value">${challehger_step_number}</stringProp>
                 <stringProp name="Argument.metadata">=</stringProp>
                 <boolProp name="HTTPArgument.use_equals">true</boolProp>
                 <stringProp name="Argument.name">challenger[step_number]</stringProp>
@@ -679,7 +888,7 @@ for(i = 1; i &lt;= matchNr; i++) {
               </elementProp>
               <elementProp name="commit" elementType="HTTPArgument">
                 <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                <stringProp name="Argument.value">Next</stringProp>
+                <stringProp name="Argument.value">${challehger_commit_value}</stringProp>
                 <stringProp name="Argument.metadata">=</stringProp>
                 <boolProp name="HTTPArgument.use_equals">true</boolProp>
                 <stringProp name="Argument.name">commit</stringProp>
