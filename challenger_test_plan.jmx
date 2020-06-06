@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jmeterTestPlan version="1.2" properties="5.0" jmeter="5.2.1">
+<jmeterTestPlan version="1.2" properties="5.0" jmeter="5.3">
   <hashTree>
     <TestPlan guiclass="TestPlanGui" testclass="TestPlan" testname="Test Plan" enabled="true">
       <stringProp name="TestPlan.comments"></stringProp>
@@ -18,8 +18,8 @@
           <boolProp name="LoopController.continue_forever">false</boolProp>
           <stringProp name="LoopController.loops">1</stringProp>
         </elementProp>
-        <stringProp name="ThreadGroup.num_threads">${__P(users,2)}</stringProp>
-        <stringProp name="ThreadGroup.ramp_time">${__P(rump-up,2)}</stringProp>
+        <stringProp name="ThreadGroup.num_threads">${__P(users,1)}</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">${__P(rump-up,)}</stringProp>
         <boolProp name="ThreadGroup.scheduler">true</boolProp>
         <stringProp name="ThreadGroup.duration">${__P(duration,200)}</stringProp>
         <stringProp name="ThreadGroup.delay"></stringProp>
@@ -63,6 +63,12 @@
           </collectionProp>
         </HeaderManager>
         <hashTree/>
+        <CookieManager guiclass="CookiePanel" testclass="CookieManager" testname="HTTP Cookie Manager" enabled="true">
+          <collectionProp name="CookieManager.cookies"/>
+          <boolProp name="CookieManager.clearEachIteration">false</boolProp>
+          <boolProp name="CookieManager.controlledByThreadGroup">false</boolProp>
+        </CookieManager>
+        <hashTree/>
         <ConfigTestElement guiclass="HttpDefaultsGui" testclass="ConfigTestElement" testname="HTTP Request Defaults" enabled="true">
           <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
             <collectionProp name="Arguments.arguments"/>
@@ -76,12 +82,6 @@
           <stringProp name="HTTPSampler.connect_timeout"></stringProp>
           <stringProp name="HTTPSampler.response_timeout"></stringProp>
         </ConfigTestElement>
-        <hashTree/>
-        <CookieManager guiclass="CookiePanel" testclass="CookieManager" testname="HTTP Cookie Manager" enabled="true">
-          <collectionProp name="CookieManager.cookies"/>
-          <boolProp name="CookieManager.clearEachIteration">false</boolProp>
-          <boolProp name="CookieManager.controlledByThreadGroup">false</boolProp>
-        </CookieManager>
         <hashTree/>
         <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="CSV Data Set Config" enabled="true">
           <stringProp name="delimiter">,</stringProp>
@@ -187,6 +187,16 @@
             <stringProp name="TestPlan.comments">Asserts that response code equals 200</stringProp>
           </ResponseAssertion>
           <hashTree/>
+          <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Is_Main_Page" enabled="true">
+            <collectionProp name="Asserion.test_strings">
+              <stringProp name="1052810057">Welcome to our Script Challenge</stringProp>
+            </collectionProp>
+            <stringProp name="Assertion.custom_message"></stringProp>
+            <stringProp name="Assertion.test_field">Assertion.response_data</stringProp>
+            <boolProp name="Assertion.assume_success">false</boolProp>
+            <intProp name="Assertion.test_type">2</intProp>
+          </ResponseAssertion>
+          <hashTree/>
         </hashTree>
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="POST_Step_1_Start_Challange" enabled="true">
           <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" enabled="true">
@@ -254,9 +264,9 @@
             <stringProp name="TestPlan.comments">Asserts that response code equals 200</stringProp>
           </ResponseAssertion>
           <hashTree/>
-          <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Assertion" enabled="true">
+          <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Is_Redirected_To_Step_2" enabled="true">
             <collectionProp name="Asserion.test_strings">
-              <stringProp name="3540684">step</stringProp>
+              <stringProp name="-892368465">step/2</stringProp>
             </collectionProp>
             <stringProp name="Assertion.custom_message"></stringProp>
             <stringProp name="Assertion.test_field">Assertion.response_data</stringProp>
@@ -317,7 +327,7 @@
             <stringProp name="TestPlan.comments">Extracts commit value from response body using regular expression</stringProp>
           </RegexExtractor>
           <hashTree/>
-          <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Assertion" enabled="true">
+          <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Assert_Is_OK" enabled="true">
             <collectionProp name="Asserion.test_strings">
               <stringProp name="49586">200</stringProp>
             </collectionProp>
@@ -325,6 +335,16 @@
             <stringProp name="Assertion.test_field">Assertion.response_code</stringProp>
             <boolProp name="Assertion.assume_success">false</boolProp>
             <intProp name="Assertion.test_type">16</intProp>
+          </ResponseAssertion>
+          <hashTree/>
+          <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Is_Step_2_Page" enabled="true">
+            <collectionProp name="Asserion.test_strings">
+              <stringProp name="-1808501762">Step 2</stringProp>
+            </collectionProp>
+            <stringProp name="Assertion.custom_message"></stringProp>
+            <stringProp name="Assertion.test_field">Assertion.response_data</stringProp>
+            <boolProp name="Assertion.assume_success">false</boolProp>
+            <intProp name="Assertion.test_type">2</intProp>
           </ResponseAssertion>
           <hashTree/>
         </hashTree>
@@ -390,9 +410,9 @@
           <stringProp name="HTTPSampler.response_timeout"></stringProp>
         </HTTPSamplerProxy>
         <hashTree>
-          <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Assertion" enabled="true">
+          <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Is_Redirected_To_Step_3" enabled="true">
             <collectionProp name="Asserion.test_strings">
-              <stringProp name="3540684">step</stringProp>
+              <stringProp name="-892368464">step/3</stringProp>
             </collectionProp>
             <stringProp name="Assertion.custom_message"></stringProp>
             <stringProp name="Assertion.test_field">Assertion.response_data</stringProp>
@@ -476,10 +496,11 @@
             <stringProp name="TestPlan.comments">Extracts every order id and order value</stringProp>
           </RegexExtractor>
           <hashTree/>
-          <BeanShellPostProcessor guiclass="TestBeanGUI" testclass="BeanShellPostProcessor" testname="BeanShell_Find_Max_Order_Id" enabled="true">
+          <JSR223PostProcessor guiclass="TestBeanGUI" testclass="JSR223PostProcessor" testname="JSR223_PostProcessor_Find_Max_Order_Id" enabled="true">
+            <stringProp name="TestPlan.comments">This code finds largest order id and matching value</stringProp>
+            <stringProp name="cacheKey">true</stringProp>
             <stringProp name="filename"></stringProp>
             <stringProp name="parameters"></stringProp>
-            <boolProp name="resetInterpreter">false</boolProp>
             <stringProp name="script">int matchNr = Integer.parseInt(vars.get(&quot;order_info_matchNr&quot;));;
 int max_order_id;
 String max_order_value = &quot;&quot;;
@@ -493,8 +514,8 @@ for(i = 1; i &lt;= matchNr; i++){
 }
 vars.putObject(&quot;max_order_id&quot;, max_order_id);
 vars.putObject(&quot;max_order_value&quot;, max_order_value);</stringProp>
-            <stringProp name="TestPlan.comments">This code finds largest order id and matching value</stringProp>
-          </BeanShellPostProcessor>
+            <stringProp name="scriptLanguage">groovy</stringProp>
+          </JSR223PostProcessor>
           <hashTree/>
           <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Assert_Is_OK" enabled="true">
             <collectionProp name="Asserion.test_strings">
@@ -505,6 +526,16 @@ vars.putObject(&quot;max_order_value&quot;, max_order_value);</stringProp>
             <boolProp name="Assertion.assume_success">false</boolProp>
             <intProp name="Assertion.test_type">8</intProp>
             <stringProp name="TestPlan.comments">Asserts that response code equals 200</stringProp>
+          </ResponseAssertion>
+          <hashTree/>
+          <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Is_Step_3_Page" enabled="true">
+            <collectionProp name="Asserion.test_strings">
+              <stringProp name="-1808501761">Step 3</stringProp>
+            </collectionProp>
+            <stringProp name="Assertion.custom_message"></stringProp>
+            <stringProp name="Assertion.test_field">Assertion.response_data</stringProp>
+            <boolProp name="Assertion.assume_success">false</boolProp>
+            <intProp name="Assertion.test_type">2</intProp>
           </ResponseAssertion>
           <hashTree/>
         </hashTree>
@@ -588,9 +619,9 @@ vars.putObject(&quot;max_order_value&quot;, max_order_value);</stringProp>
             <stringProp name="TestPlan.comments">Asserts that response code equals 200</stringProp>
           </ResponseAssertion>
           <hashTree/>
-          <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Assertion" enabled="true">
+          <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Is_Redirected_To_Step_4" enabled="true">
             <collectionProp name="Asserion.test_strings">
-              <stringProp name="3540684">step</stringProp>
+              <stringProp name="-892368463">step/4</stringProp>
             </collectionProp>
             <stringProp name="Assertion.custom_message"></stringProp>
             <stringProp name="Assertion.test_field">Assertion.response_data</stringProp>
@@ -663,17 +694,18 @@ vars.putObject(&quot;max_order_value&quot;, max_order_value);</stringProp>
             <stringProp name="TestPlan.comments">Extracts all order numbers and values from response body using regular expression</stringProp>
           </RegexExtractor>
           <hashTree/>
-          <BeanShellPostProcessor guiclass="TestBeanGUI" testclass="BeanShellPostProcessor" testname="BeanShell_Get_All_Order_Numbers_And_Values" enabled="true">
-            <stringProp name="filename"></stringProp>
+          <JSR223PostProcessor guiclass="TestBeanGUI" testclass="JSR223PostProcessor" testname="JSR223_PostProcessor_Get_All_Order_Numbers_And_Values" enabled="true">
+            <stringProp name="TestPlan.comments">Writes all order numbers and values in separete variables</stringProp>
+            <stringProp name="scriptLanguage">groovy</stringProp>
             <stringProp name="parameters"></stringProp>
-            <boolProp name="resetInterpreter">false</boolProp>
+            <stringProp name="filename"></stringProp>
+            <stringProp name="cacheKey">true</stringProp>
             <stringProp name="script">int matchNr = Integer.parseInt(vars.get(&quot;order_number_value_matchNr&quot;));
 for(i = 1; i &lt;= matchNr; i++) {
 	vars.put(&quot;order_number_&quot; + i, vars.get(&quot;order_number_value_&quot; + i + &quot;_g1&quot;));
 	vars.put(&quot;order_value_&quot; + i, vars.get(&quot;order_number_value_&quot; + i + &quot;_g2&quot;));
 }</stringProp>
-            <stringProp name="TestPlan.comments">Writes all order numbers and values in separete variables</stringProp>
-          </BeanShellPostProcessor>
+          </JSR223PostProcessor>
           <hashTree/>
           <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Assert_Is_OK" enabled="true">
             <collectionProp name="Asserion.test_strings">
@@ -684,6 +716,16 @@ for(i = 1; i &lt;= matchNr; i++) {
             <boolProp name="Assertion.assume_success">false</boolProp>
             <intProp name="Assertion.test_type">8</intProp>
             <stringProp name="TestPlan.comments">Asserts that response code equals 200</stringProp>
+          </ResponseAssertion>
+          <hashTree/>
+          <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Is_Step_4_Page" enabled="true">
+            <collectionProp name="Asserion.test_strings">
+              <stringProp name="-1808501760">Step 4</stringProp>
+            </collectionProp>
+            <stringProp name="Assertion.custom_message"></stringProp>
+            <stringProp name="Assertion.test_field">Assertion.response_data</stringProp>
+            <boolProp name="Assertion.assume_success">false</boolProp>
+            <intProp name="Assertion.test_type">2</intProp>
           </ResponseAssertion>
           <hashTree/>
         </hashTree>
@@ -812,9 +854,9 @@ for(i = 1; i &lt;= matchNr; i++) {
           <stringProp name="HTTPSampler.response_timeout"></stringProp>
         </HTTPSamplerProxy>
         <hashTree>
-          <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Assertion" enabled="true">
+          <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Is_Redirected_To_Step_5" enabled="true">
             <collectionProp name="Asserion.test_strings">
-              <stringProp name="3540684">step</stringProp>
+              <stringProp name="-892368462">step/5</stringProp>
             </collectionProp>
             <stringProp name="Assertion.custom_message"></stringProp>
             <stringProp name="Assertion.test_field">Assertion.response_data</stringProp>
@@ -897,6 +939,16 @@ for(i = 1; i &lt;= matchNr; i++) {
             <stringProp name="TestPlan.comments">Asserts that response code equals 200</stringProp>
           </ResponseAssertion>
           <hashTree/>
+          <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Is_Step_5_Page" enabled="true">
+            <collectionProp name="Asserion.test_strings">
+              <stringProp name="-1808501759">Step 5</stringProp>
+            </collectionProp>
+            <stringProp name="Assertion.custom_message"></stringProp>
+            <stringProp name="Assertion.test_field">Assertion.response_data</stringProp>
+            <boolProp name="Assertion.assume_success">false</boolProp>
+            <intProp name="Assertion.test_type">2</intProp>
+          </ResponseAssertion>
+          <hashTree/>
         </hashTree>
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GET_One_Time_Token" enabled="true">
           <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" enabled="true">
@@ -934,6 +986,16 @@ for(i = 1; i &lt;= matchNr; i++) {
             <boolProp name="Assertion.assume_success">false</boolProp>
             <intProp name="Assertion.test_type">8</intProp>
             <stringProp name="TestPlan.comments">Asserts that response code equals 200</stringProp>
+          </ResponseAssertion>
+          <hashTree/>
+          <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Contains_Code" enabled="true">
+            <collectionProp name="Asserion.test_strings">
+              <stringProp name="3059181">code</stringProp>
+            </collectionProp>
+            <stringProp name="Assertion.custom_message"></stringProp>
+            <stringProp name="Assertion.test_field">Assertion.response_data</stringProp>
+            <boolProp name="Assertion.assume_success">false</boolProp>
+            <intProp name="Assertion.test_type">2</intProp>
           </ResponseAssertion>
           <hashTree/>
         </hashTree>
@@ -1010,7 +1072,7 @@ for(i = 1; i &lt;= matchNr; i++) {
             <stringProp name="TestPlan.comments">Asserts that response code equals 200</stringProp>
           </ResponseAssertion>
           <hashTree/>
-          <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Assertion" enabled="true">
+          <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Is_Redirected_To_Done_Page" enabled="true">
             <collectionProp name="Asserion.test_strings">
               <stringProp name="3089282">done</stringProp>
             </collectionProp>
@@ -1052,7 +1114,7 @@ for(i = 1; i &lt;= matchNr; i++) {
             <stringProp name="TestPlan.comments">Asserts that response code equals 200</stringProp>
           </ResponseAssertion>
           <hashTree/>
-          <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Assertion" enabled="true">
+          <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Is_Done" enabled="true">
             <collectionProp name="Asserion.test_strings">
               <stringProp name="2135970">Done</stringProp>
             </collectionProp>
